@@ -6,6 +6,10 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+img{
+   max-width: 100%;
+}
+
 header .contenedor {
   display: flex;
   justify-content: space-between;
@@ -22,7 +26,14 @@ header ul li {
 
 a {
   text-decoration: none;
+  color:dodgerblue;
 }
+
+a:hover{
+     color:rgb(255, 255, 255);
+}
+
+
 
 .contenedor {
   max-width: 1280px;
