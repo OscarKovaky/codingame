@@ -42,7 +42,7 @@ a:hover{
 }
 
 header {
-  background: linear-gradient(rgba(84,93,220,.9), rgba(96,171,245,.9)), url(../imagenes/fondo.jpg);
+  background: linear-gradient(rgba(84,93,220,.9), rgba(96,171,245,.9)), url(./imagenes/fondo.jpg);
   height: 100vh;
   background-size: cover;
 }
