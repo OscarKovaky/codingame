@@ -702,6 +702,9 @@ header nav {
   background: rgba(14, 24, 40, 0.96);
   width: 100%;
   display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   padding: 1.4rem;
   border-bottom: 1px solid rgba(126, 249, 255, 0.2);
   z-index: 1250;
@@ -714,6 +717,9 @@ header nav {
 
 header nav.is-open {
   display: flex !important;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .nav-bar a {
@@ -954,20 +960,18 @@ footer img {
     background: transparent;
  }
 
- header nav {
-  display: none;
+ header nav:not(.is-open) {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
  }
 
  header nav.is-open {
-  display: flex;
- }
-
- header nav {
-  display: none;
- }
-
- header nav.is-open {
-  display: flex;
+  display: flex !important;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
  }
 
  .menu {
