@@ -64,19 +64,27 @@ header .contenedor-nav {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: .4rem;
 }
 
 .nav-bar a{
   color: var(--text-icons);
   text-decoration:none;
-  font-size:2rem;
+  font-size:1.7rem;
   font-weight:700;
-  padding:1rem;
+  padding:1rem 1.2rem;
+  border-radius: .8rem;
+  transition: all .25s ease;
 }
 
 .nav-bar a:hover{
-  background-color: var(--divider-color);
-  color:var(--gris);
+  background-color: rgba(126, 249, 255, 0.15);
+  color:#7ef9ff;
+}
+
+.nav-bar .nav-cta {
+  border: 1px solid rgba(126, 249, 255, 0.5);
 }
 
 
@@ -133,14 +141,19 @@ header {
   text-align: center;
 }
 
-.contenedor-titulo a, #sobre-mi a, #blog a, #que-esperas a, #contacto input[type="submit"] {
+.button, #contacto input[type="submit"] {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   color: #fff;
-  background: #5cb8ff;
+  background: linear-gradient(135deg, #49b3ff, #8674ff);
   padding: 14px 24px;
-  width: 128px;
+  width: auto;
   display: inline-block;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  border: 1px solid rgba(126, 249, 255, 0.4);
+  box-shadow: 0 10px 24px rgba(71, 127, 255, 0.3);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 
 p.logo {
@@ -151,23 +164,11 @@ p.logo {
 }
 
 
-button {
-  width: 166px;
-  height: 50px;
-  color: #eee;
-  font-weight: bold;
-  background-color: var(--accent-color);
-  border-radius: 0.5rem;
-  border: 0rem;
-  margin: auto;
-  box-shadow: black;
-  box-shadow: var(--shadow-button);
-}
-
-
 .button:hover {
-  background-color: var(--primary-text);
   color:var(--text-icons);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(71, 127, 255, 0.38);
+  filter: brightness(1.08);
 }
 
 
@@ -427,22 +428,36 @@ textarea {
   border-radius: 12px;
   padding-top: 1rem;
   padding-bottom: 3rem;
+  max-width: 880px;
+  margin: 0 auto;
 }
 
 #contacto input[type="submit"] {
-  width: 166px;
-  background-color: var(--accent-color);
-  border-radius: 0.5rem;
-  border: 0rem;
+  width: auto;
   margin: auto;
-  box-shadow: black;
-  box-shadow: var(--shadow-button);
+  cursor: pointer;
+}
+
+.contacto-lead {
+  text-align: center;
+  max-width: 60ch;
+  margin: .5rem auto 2.4rem;
+  color: #d9e6ff;
 }
 
 .contacto-info {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1.6rem;
   margin-top: 60px;
+}
+
+.contacto-info .mail,
+.contacto-info .whatsapp {
+  background: rgba(6, 13, 24, 0.7);
+  border: 1px solid rgba(126, 249, 255, 0.3);
+  border-radius: 10px;
+  padding: 1rem 1.4rem;
 }
 
 .contacto-info img {
@@ -501,6 +516,10 @@ html {
 
 .menu-icon {
   display: none;
+  border: 1px solid rgba(126, 249, 255, 0.4);
+  background: rgba(6, 13, 24, 0.85);
+  color: #fff;
+  border-radius: .8rem;
 }
 
 @media (max-width: 800px) {
@@ -508,27 +527,28 @@ html {
 .menu-icon {
   display: block;
 float: right;
-width: 40px;
-height: 35px;
+width: 46px;
+height: 40px;
 margin-top: 15px;
+font-size: 2.4rem;
+line-height: 1;
 }
 
 header nav {
   position: absolute;
-  top: 83px;
+  top: 72px;
   left: 0;
-  height: 268px;
+  height: auto;
   background: rgba(10, 16, 31, 0.98);
   width: 100%;
   display: none;
+  padding: 1.4rem;
+  border-bottom: 1px solid rgba(126, 249, 255, 0.2);
 }
 
-header nav ul {
+.nav-bar {
   flex-direction: column;
-}
-
-header nav ul li {
-  margin-bottom: 15px;
+  align-items: stretch;
 }
 
 
@@ -754,7 +774,6 @@ footer img {
 
 
   
-
 
 
 
