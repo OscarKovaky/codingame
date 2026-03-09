@@ -33,7 +33,7 @@
             <div class="contenedor-titulo">
                 <h1>Oscar Ramirez Aguilar</h1>
                 <h2>Desarrollador Web</h2>
-                <h2>"Si lo puedes imaginar lo puedes programar"</h2>
+                <h2 id="typing-hero" class="typing-hero" data-text="Si lo puedes imaginar lo puedes programar"></h2>
                 <a class="button" href="#mis-trabajos">Ver mis trabajos</a>
             </div>             
          </div>
@@ -331,6 +331,13 @@
         $(window).scroll(function(){
            scroll = $(window).scrollTop();
 
+           if (window.innerWidth <= 800) {
+            $('.menu').css({"position":"fixed","width":"100%","top":"0","background":"rgba(10, 16, 31, 0.96)","box-shadow":"0 8px 24px rgba(0, 0, 0, 0.35)","z-index":"1200"});
+            $('.menu a').css({"color":"#FFFFFF"});
+            $('.logo').css({"color":"#FFFFFF"});
+            return;
+           }
+
            if(scroll > 100){
             $('.menu').css({"position":"fixed"});
             $('.menu').css({"width":"100%"});
@@ -352,16 +359,43 @@
                                                       
         $('.menu-icon').click(function(){
           const expanded = $(this).attr('aria-expanded') === 'true';
-          $(this).attr('aria-expanded', !expanded);
-          $('header nav').slideToggle();
+          const nextExpanded = !expanded;
+
+          $(this).attr('aria-expanded', nextExpanded);
+          $('header nav').toggleClass('is-open', nextExpanded);
         });
 
         $('.nav-bar a').click(function(){
           if (window.innerWidth <= 800) {
-            $('header nav').slideUp();
+            $('header nav').removeClass('is-open');
             $('.menu-icon').attr('aria-expanded', 'false');
           }
         });
+
+        $(window).on('resize', function(){
+          if (window.innerWidth > 800) {
+            $('header nav').removeClass('is-open');
+            $('.menu-icon').attr('aria-expanded', 'false');
+          }
+        });
+
+        const heroTypingElement = document.querySelector('#typing-hero');
+        const heroText = heroTypingElement ? heroTypingElement.dataset.text : '';
+        let typingIndex = 0;
+
+        function typeHeroText() {
+          if (!heroTypingElement) {
+            return;
+          }
+
+          if (typingIndex <= heroText.length) {
+            heroTypingElement.textContent = `"${heroText.slice(0, typingIndex)}"`;
+            typingIndex += 1;
+            setTimeout(typeHeroText, 75);
+          }
+        }
+
+        typeHeroText();
 
       })
     </script>
