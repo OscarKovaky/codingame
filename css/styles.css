@@ -121,6 +121,10 @@ header,
   z-index: 1;
 }
 
+.menu {
+  z-index: 1200;
+}
+
 header {
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(96,171,245,.9)), url(../imagenes/fondo.jpg);
   height: 60vh;
@@ -139,6 +143,12 @@ header {
 
 .contenedor-titulo {
   text-align: center;
+  max-width: 720px;
+  padding: 2.2rem 2rem;
+  border-radius: 12px;
+  background: rgba(10, 19, 36, 0.78);
+  border: 1px solid rgba(126, 249, 255, 0.28);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
 .button, #contacto input[type="submit"] {
@@ -200,15 +210,19 @@ p.logo {
   justify-content: space-around;
   flex-wrap: wrap;
   color: #fff;
+  gap: 1.6rem;
 }
 
 .servicio {
   width: 24%;
   padding: 34px 30px 38px 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 40px;
   position: relative;
   backdrop-filter: blur(2px);
+  background: rgba(16, 25, 44, 0.92);
+  border: 1px solid rgba(92, 184, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .servicio h4 {
@@ -222,12 +236,10 @@ p.logo {
 }
 
 .contenedor-servicios .violeta {
-    background: linear-gradient(to top, #5055df, #6d68f3);
-    box-shadow: 0 12px 30px 0 rgba(80, 85, 223, .37);
+    border-top: 4px solid #8674ff;
 }
 .contenedor-servicios .celeste {
-    background: linear-gradient(to top, #40a8f9, #5cb8ff);
-    box-shadow: 0 12px 30px 0 rgba(86, 163, 222, .3);
+    border-top: 4px solid #5cb8ff;
 }
 
 .ondas {
@@ -397,24 +409,47 @@ span {
   flex-wrap: wrap;
   width: 77%;
   margin: auto;
+  column-gap: 1.6rem;
+  row-gap: 1.4rem;
 }
 
-input[type="text"], input[type="email"] {
-  width: 49%;
-  margin-bottom: 15px;
-  padding: 18px 0;
-  border: 0;
-  border-bottom: 1px solid #5cb8ff;
-  font-size: 17px;
-}
-
-textarea {
-  padding: 18px 0;
-  border: 0;
-  border-bottom: 1px solid #5cb8ff;
-  font-size: 17px;
-  margin-bottom: 40px;
+#contacto input[type="text"],
+#contacto input[type="email"],
+#contacto textarea {
   width: 100%;
+  padding: 1.4rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 184, 255, 0.45);
+  background: rgba(6, 13, 24, 0.72);
+  color: #e8f2ff;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+#contacto input[type="text"],
+#contacto input[type="email"] {
+  width: calc(50% - .8rem);
+  min-height: 52px;
+}
+
+#contacto textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+#contacto input::placeholder,
+#contacto textarea::placeholder {
+  color: rgba(217, 230, 255, 0.75);
+}
+
+#contacto input[type="text"]:focus,
+#contacto input[type="email"]:focus,
+#contacto textarea:focus {
+  border-color: rgba(126, 249, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(126, 249, 255, 0.16);
+  background: rgba(9, 18, 33, 0.9);
 }
 
 .container-form {
@@ -500,6 +535,8 @@ footer p {
   position: fixed;
   top: 80%;
   right: 1%;
+  z-index: 1300;
+  display: inline-flex;
 }
 
 html {
@@ -532,6 +569,28 @@ height: 40px;
 margin-top: 15px;
 font-size: 2.4rem;
 line-height: 1;
+position: relative;
+z-index: 1260;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 16, 31, 0.96);
+  border-bottom: 1px solid rgba(126, 249, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.contenedor-nav {
+  padding: 0 1.2rem;
+  min-height: 7rem;
+  align-items: center;
+}
+
+header {
+  padding-top: 7rem;
 }
 
 header nav {
@@ -544,11 +603,25 @@ header nav {
   display: none;
   padding: 1.4rem;
   border-bottom: 1px solid rgba(126, 249, 255, 0.2);
+  z-index: 1250;
 }
 
 .nav-bar {
   flex-direction: column;
   align-items: stretch;
+}
+
+header nav.is-open {
+  display: flex !important;
+}
+
+.nav-bar a {
+  border: 1px solid rgba(126, 249, 255, 0.2);
+  background: rgba(18, 30, 53, 0.72);
+}
+
+.nav-bar a:hover {
+  background: rgba(73, 179, 255, 0.2);
 }
 
 
@@ -567,10 +640,15 @@ header nav {
 
 .contenedor-servicios {
     flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
 }
 
 .servicio {
-  width: 100%;
+  width: min(100%, 460px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
   padding: 34px 30px 69px 30px;
 }
 
@@ -581,6 +659,7 @@ header nav {
 
 .contenedor-trabajar {
     flex-direction: column;
+    gap: 2rem;
 }
 
 #por-que-trabajar .item {
@@ -593,11 +672,12 @@ header nav {
 
 #blog .contenedor-publicaciones {
     flex-direction: column;
+    gap: 2rem;
 }
 
 #blog .publicacion {
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 0;
 }
 
 #contacto form {
@@ -605,8 +685,17 @@ header nav {
     flex-direction: column;
 }
 
-input[type="text"], input[type="email"] {
+ #contacto input[type="text"],
+ #contacto input[type="email"] {
     width: 100%;
+}
+
+#contacto form {
+    row-gap: 1.2rem;
+}
+
+#contacto textarea {
+    margin-top: .2rem;
 }
 
 
@@ -640,6 +729,7 @@ h2 {
   top: auto;
   bottom: 2%;
   right: 3%;
+  z-index: 1300;
 }
 
 footer img {
@@ -759,13 +849,22 @@ footer img {
     background:#26212E;
  }
 
+ header nav {
+  display: none;
+ }
+
+ header nav.is-open {
+  display: flex;
+ }
+
  .menu {
   background:#26212E;
  }
 
  .contenedor-servicios{
    flex-direction: column;
-   padding-left: 5rem;
+   align-items: center;
+   padding-left: 0;
  }
 
  
@@ -774,7 +873,6 @@ footer img {
 
 
   
-
 
 
 
