@@ -183,6 +183,25 @@ p.logo {
 
 
 
+
+.typing-hero {
+  min-height: 2.4rem;
+  color: #cfe6ff;
+  letter-spacing: .03em;
+}
+
+.typing-hero::after {
+  content: "|";
+  margin-left: .2rem;
+  color: #7ef9ff;
+  animation: blink-caret 0.8s step-end infinite;
+}
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* SECCION DE SOBRE MI */
 
 
