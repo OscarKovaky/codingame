@@ -213,17 +213,64 @@ button {
 
 /* SECCION MIS TRABAJOS */
 
+#mis-trabajos {
+  position: relative;
+  background: radial-gradient(circle at top, #1b2742 0%, #0c111f 60%, #070b14 100%);
+  overflow: hidden;
+}
+
+#mis-trabajos h3 {
+  position: relative;
+  z-index: 2;
+}
+
+#code-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#mis-trabajos .owl-carousel {
+  position: relative;
+  z-index: 2;
+}
+
+#mis-trabajos .owl-carousel .item {
+  background: rgba(16, 25, 44, 0.92);
+  border: 1px solid rgba(92, 184, 255, 0.35);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 210px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+#mis-trabajos .owl-carousel .item h4 {
+  color: #9fd6ff;
+  font-size: 22px;
+  margin-top: 0;
+}
+
+#mis-trabajos .owl-carousel .item p {
+  color: #d9e6ff;
+  text-align: left;
+  min-height: 48px;
+}
+
+#mis-trabajos .owl-carousel .item code {
+  display: inline-block;
+  color: #7ef9ff;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
 button.owl-prev, button.owl-next {
-    font-size: 40px !important;
+  font-size: 40px !important;
 }
 
 span {
-    color: #71bcfa;
-}
-
-#mis-trabajos p {
-text-align: center;
-color: #000;
+  color: #71bcfa;
 }
 
 /* SECCION POR QUE TRABAJAR CONMIGO */

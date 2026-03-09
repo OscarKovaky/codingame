@@ -115,11 +115,29 @@
 
         <section id="mis-trabajos">
           <div class="contenedor">
+            <div id="code-particles"></div>
+            <h3>Mis trabajos</h3>
             <div class="owl-carousel owl-theme">
-              <div class="item"><h4>1</h4></div>
-              <div class="item"><h4>2</h4></div>
-              <div class="item"><h4>3</h4></div>
-              <div class="item"><h4>4</h4></div>
+              <div class="item">
+                <h4>Landing para startup</h4>
+                <p>Diseño moderno, animaciones suaves y foco en conversión.</p>
+                <code>&lt;html/&gt; + &lt;css/&gt; + jQuery</code>
+              </div>
+              <div class="item">
+                <h4>Tienda online</h4>
+                <p>Catálogo responsive con checkout optimizado para mobile.</p>
+                <code>UI/UX + rendimiento + SEO</code>
+              </div>
+              <div class="item">
+                <h4>Web corporativa</h4>
+                <p>Sitio autoadministrable con panel de contenido.</p>
+                <code>WordPress + HTML5 + CSS3</code>
+              </div>
+              <div class="item">
+                <h4>Portafolio creativo</h4>
+                <p>Identidad visual personalizada con interacción dinámica.</p>
+                <code>Javascript + Owl Carousel</code>
+              </div>
              
           </div>
         </section>
@@ -235,8 +253,57 @@
 
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="owl/owl.carousel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
     <script>
+      tsParticles.load("code-particles", {
+        fullScreen: {
+          enable: false
+        },
+        background: {
+          color: "transparent"
+        },
+        particles: {
+          color: {
+            value: ["#5cb8ff", "#7ef9ff", "#8d9eff"]
+          },
+          links: {
+            color: "#5cb8ff",
+            enable: true,
+            distance: 140,
+            opacity: 0.3,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 1.3
+          },
+          number: {
+            value: 55
+          },
+          opacity: {
+            value: 0.45
+          },
+          shape: {
+            type: "char",
+            options: {
+              char: {
+                value: ["{", "}", "<", "/", ">", ";", "()", "[]", "#"],
+                font: "Courier New",
+                style: "",
+                weight: "400"
+              }
+            }
+          },
+          size: {
+            value: {
+              min: 10,
+              max: 16
+            }
+          }
+        }
+      });
+
         $('.owl-carousel').owlCarousel({
         loop:true,
         margin:10,
