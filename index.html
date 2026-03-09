@@ -16,13 +16,15 @@
          <div class="menu">
             <div class="contenedor-nav">
                 <p class="logo">Gaming Code</p>
-                <img class="menu-icon" src="imagenes/menu.png" alt="">
+                <button class="menu-icon" type="button" aria-label="Abrir menú" aria-expanded="false">
+                  ☰
+                </button>
                 <nav class="nav-bar">                   
-                        <a href="#sobre-mi">Sobre mi</a>
+                        <a href="#sobre-mi">Sobre mí</a>
                         <a href="#mis-trabajos">Mis trabajos</a>
-                        <a href="#por-que-trabajar">¿Por que trabajar conmigo?</a>
-                        <a href="#blog">Blog</a></li>
-                        <a href="#contacto">Contacto</a>                    
+                        <a href="#por-que-trabajar">¿Por qué trabajar conmigo?</a>
+                        <a href="#blog">Blog</a>
+                        <a class="nav-cta" href="#contacto">Contacto</a>
                 </nav>
             </div>
          </div>
@@ -32,7 +34,7 @@
                 <h1>Oscar Ramirez Aguilar</h1>
                 <h2>Desarrollador Web</h2>
                 <h2>"Si lo puedes imaginar lo puedes programar"</h2>
-                <button class="button" href="#mis-trabajos">Ver mis trabajos</button>
+                <a class="button" href="#mis-trabajos">Ver mis trabajos</a>
             </div>             
          </div>
 
@@ -63,7 +65,7 @@
                         Puedes ponerte en contacto conmigo a traves de Facebook, Linkedin completando el formulario de contacto
                         que se encuentra al final de mi sitio
                     </p>
-                    <button class="button" href="">Ver mis trabajos</button>
+                    <a class="button" href="#mis-trabajos">Ver mis trabajos</a>
                 </div>
             </div>
         </div>        
@@ -187,7 +189,7 @@
                 <div class="contenido">
                   <h4>No alcanza con tener solamente una página web</h4>
                   <p>¿Querés aprender cuales son las herramientas que usan las mejores marcas para generar tráfico?</p>
-                  <button class="button"  href="">Leer mas ➝</button>
+                  <a class="button" href="#">Leer más ➝</a>
                 </div>
               </div>
               <div class="publicacion">
@@ -195,7 +197,7 @@
                 <div class="contenido">
                   <h4>¿Qué es el remarketing y como utilizarlo?</h4>
                   <p>El remarketing es una de las técnicas mas utlizadas por las mejores companías! ¿Querés saber de que se trata?</p>
-                  <button class="button"  href="">Leer mas ➝</button>
+                  <a class="button" href="#">Leer más ➝</a>
                 </div>
               </div>
             </div>
@@ -205,7 +207,7 @@
         <section id="que-esperas">
           <div class="contenedor">
             <h3>¿Qué esperas para tener tu página web?</h3>
-            <button class="button"  href="">Leer mas ➝</button>
+            <a class="button" href="#contacto">Empezar ahora ➝</a>
           </div>
         </section>
 
@@ -213,6 +215,7 @@
    
           <div class="container-form">
             <h3>Contacto</h3>
+            <p class="contacto-lead">¿Tienes una idea en mente? Escríbeme y te responderé con una propuesta en menos de 24 horas.</p>
             <form action="envio-formulario.php" method="post" enctype="multipart/form-data">
               <input type="text" id="inputNombre" placeholder="Nombre" name="nombre" required>
               <input type="email" id ="inputEmail" placeholder="Email" name="email" required>
@@ -348,8 +351,17 @@
         })
                                                       
         $('.menu-icon').click(function(){
-        $('header nav').slideToggle();
-})
+          const expanded = $(this).attr('aria-expanded') === 'true';
+          $(this).attr('aria-expanded', !expanded);
+          $('header nav').slideToggle();
+        });
+
+        $('.nav-bar a').click(function(){
+          if (window.innerWidth <= 800) {
+            $('header nav').slideUp();
+            $('.menu-icon').attr('aria-expanded', 'false');
+          }
+        });
 
       })
     </script>
