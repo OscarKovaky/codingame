@@ -876,6 +876,14 @@ footer img {
   display: flex;
  }
 
+ header nav {
+  display: none;
+ }
+
+ header nav.is-open {
+  display: flex;
+ }
+
  .menu {
   background: rgba(10, 16, 31, 0.96);
   border-bottom: 1px solid rgba(126, 249, 255, 0.2);
