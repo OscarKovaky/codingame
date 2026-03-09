@@ -123,6 +123,17 @@ header,
 
 .menu {
   z-index: 1200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+.menu.is-scrolled {
+  background: rgba(10, 16, 31, 0.96);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 header {
@@ -130,6 +141,7 @@ header {
   height: 60vh;
   background-size: cover;
   border-bottom: 1px solid rgba(126, 249, 255, 0.3);
+  padding-top: 8rem;
 }
 
 #contenedor-titulo-flex {
@@ -220,6 +232,33 @@ p.logo {
   background: rgba(14, 24, 40, 0.82);
   border: 1px solid rgba(92, 184, 255, 0.35);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+
+#sobre-mi .computadoras {
+  width: min(50%, 480px);
+}
+
+#sobre-mi .computadoras img {
+  filter: drop-shadow(0 14px 28px rgba(74, 145, 255, 0.32));
+}
+
+@media (min-width: 801px) {
+  #sobre-mi .computadoras img {
+    animation: float-computers 3.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+}
+
+@keyframes float-computers {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.015);
+  }
 }
 
 /* SECCION SERVICIOS */
@@ -626,6 +665,12 @@ html {
 
 @media (max-width: 800px) {
 
+.menu {
+  background: rgba(10, 16, 31, 0.96);
+  border-bottom: 1px solid rgba(126, 249, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
 .menu-icon {
   display: block;
 float: right;
@@ -638,15 +683,6 @@ position: relative;
 z-index: 1260;
 }
 
-.menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(10, 16, 31, 0.96);
-  border-bottom: 1px solid rgba(126, 249, 255, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
 
 .contenedor-nav {
   padding: 0 1.2rem;
@@ -693,6 +729,10 @@ header nav.is-open {
 
 #sobre-mi .contenedor-sobremi {
     flex-direction: column;
+}
+
+#sobre-mi .computadoras {
+  width: 100%;
 }
 
 #sobre-mi img {
