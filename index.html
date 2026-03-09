@@ -330,32 +330,13 @@
          
         $(window).scroll(function(){
            scroll = $(window).scrollTop();
+           const isDesktop = window.innerWidth > 800;
+           const shouldStick = isDesktop ? scroll > 100 : true;
 
-           if (window.innerWidth <= 800) {
-            $('.menu').css({"position":"fixed","width":"100%","top":"0","background":"rgba(10, 16, 31, 0.96)","box-shadow":"0 8px 24px rgba(0, 0, 0, 0.35)","z-index":"1200"});
-            $('.menu a').css({"color":"#FFFFFF"});
-            $('.logo').css({"color":"#FFFFFF"});
-            return;
-           }
-
-           if(scroll > 100){
-            $('.menu').css({"position":"fixed"});
-            $('.menu').css({"width":"100%"});
-            $('.menu').css({"top":"0"});
-            $('.menu').css({"background":"#26212E"});
-            $(".nav-bar").css({"background":"#26212E"});
-            $('.menu a').css({"color":"#FFFFFF"});
-            $('.logo').css({"color":"#FFFFFF"});
-            $('.menu').css({"box-shadow":"rgba(0, 0, 0, 0.22) 6px 1px 1px"});
-            $('.menu').css({"z-index":"100"});
-           }else {
-            $('.menu').css({"position":"relative"});
-            $('.menu').css({"background":"transparent"});
-            $('.menu').css({"box-shadow":"0 0 0"});
-            $('.menu a').css({"color":"#fff"});
-            $('.logo').css({"color":"#fff"});
-           }
+           $('.menu').toggleClass('is-scrolled', shouldStick);
         })
+
+        $(window).trigger('scroll');
                                                       
         const closeMobileMenu = function() {
           $('header nav').removeClass('is-open');
