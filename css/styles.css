@@ -578,6 +578,52 @@ html {
   border-radius: .8rem;
 }
 
+
+@media (min-width: 801px) {
+  #contacto .container-form {
+    padding: 3.2rem;
+  }
+
+  #contacto form {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+
+  #contacto input[type="text"],
+  #contacto input[type="email"] {
+    width: 100%;
+  }
+
+  #contacto textarea {
+    grid-column: 1 / -1;
+  }
+
+  #contacto input[type="submit"] {
+    grid-column: 1 / -1;
+    justify-self: center;
+    min-width: 240px;
+  }
+
+  .contacto-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 760px;
+    margin: 4rem auto 0;
+  }
+
+  .contacto-info .mail,
+  .contacto-info .whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+  }
+}
+
 @media (max-width: 800px) {
 
 .menu-icon {
