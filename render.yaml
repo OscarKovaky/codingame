@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: portafolio-angular-three
+    env: static
+    buildCommand: npm install && npm run build:render
+    staticPublishPath: dist/portafolio-angular-three/browser
