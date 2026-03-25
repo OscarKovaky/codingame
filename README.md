@@ -13,6 +13,14 @@ Migración base de un portafolio a Angular standalone con integración de Three.
    npm run start
    ```
 
+## Deploy en GitHub Pages
+
+Para publicar en `https://oscarkovaky.github.io/codingame/`, compila con configuración de producción (incluye `baseHref` para `/codingame/`):
+
+```bash
+npm run build
+```
+
 ## Estructura
 
 - `src/app/app.component.ts`: layout principal y lógica Three.js.
