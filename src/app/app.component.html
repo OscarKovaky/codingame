@@ -1,0 +1,19 @@
+<header class="hero">
+  <div class="hero__content">
+    <p class="eyebrow">Migración completada</p>
+    <h1>Portafolio en Angular + Three.js</h1>
+    <p>
+      Se reorganizó el sitio por secciones modulares y se integró un bloque 3D para reforzar la parte visual.
+    </p>
+  </div>
+  <div #canvasHost class="hero__visual" aria-label="Animación 3D decorativa"></div>
+</header>
+
+<main class="sections">
+  @for (section of sections; track section.title) {
+    <section class="card">
+      <h2>{{ section.title }}</h2>
+      <p>{{ section.description }}</p>
+    </section>
+  }
+</main>
