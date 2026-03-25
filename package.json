@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test"
+    "test": "ng test",
+    "build:render": "ng build --configuration=render"
   },
   "dependencies": {
     "@angular/animations": "^20.0.0",

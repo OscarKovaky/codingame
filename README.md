@@ -21,6 +21,25 @@ Para publicar en `https://oscarkovaky.github.io/codingame/`, compila con configu
 npm run build
 ```
 
+## Pipeline para Render
+
+Se agregó una pipeline de GitHub Actions en `.github/workflows/render-deploy.yml` que:
+
+1. Instala dependencias.
+2. Compila Angular con configuración `render` (`baseHref: /`).
+3. Dispara un deploy hook de Render si existe el secreto `RENDER_DEPLOY_HOOK_URL`.
+
+Para probar localmente el build que usa Render:
+
+```bash
+npm run build:render
+```
+
+También se incluye `render.yaml` para crear el servicio estático en Render usando:
+
+- `buildCommand`: `npm install && npm run build:render`
+- `staticPublishPath`: `dist/portafolio-angular-three/browser`
+
 ## Estructura
 
 - `src/app/app.component.ts`: layout principal y lógica Three.js.
