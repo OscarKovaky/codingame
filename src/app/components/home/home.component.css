@@ -1,0 +1,33 @@
+:host {
+  display: grid;
+  gap: 1rem;
+}
+
+.eyebrow {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  margin-bottom: 0.2rem;
+}
+
+.home-hero h2,
+.role {
+  margin: 0.2rem 0;
+}
+
+.role {
+  color: var(--muted-color);
+  font-weight: 600;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+h3,
+h4 {
+  margin-top: 0;
+}

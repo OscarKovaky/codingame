@@ -1,0 +1,10 @@
+.blog-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.date {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted-color);
+}

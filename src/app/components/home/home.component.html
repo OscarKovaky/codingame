@@ -1,0 +1,31 @@
+<section class="panel home-hero">
+  <p class="eyebrow">Sobre mí</p>
+  <h2>{{ intro.name }}</h2>
+  <p class="role">{{ intro.role }}</p>
+  <p>{{ intro.description }}</p>
+</section>
+
+<section class="panel">
+  <h3>Servicios</h3>
+  <div class="cards-grid">
+    @for (service of serviceCards; track service.title) {
+      <article class="card">
+        <h4>{{ service.title }}</h4>
+        <p>{{ service.description }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="panel">
+  <h3>Mis trabajos</h3>
+  <div class="cards-grid">
+    @for (work of workCards; track work.title) {
+      <article class="card">
+        <h4>{{ work.title }}</h4>
+        <p>{{ work.summary }}</p>
+        <p><strong>Stack:</strong> {{ work.stack }}</p>
+      </article>
+    }
+  </div>
+</section>
