@@ -1,0 +1,12 @@
+<section class="panel">
+  <h2>Blog</h2>
+  <div class="blog-list">
+    @for (post of posts; track post.title) {
+      <article class="card">
+        <p class="date">{{ post.date }}</p>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt }}</p>
+      </article>
+    }
+  </div>
+</section>

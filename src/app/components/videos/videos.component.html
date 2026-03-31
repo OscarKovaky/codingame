@@ -1,0 +1,12 @@
+<section class="panel">
+  <h2>Sección de videos</h2>
+  <div class="cards-grid">
+    @for (video of videos; track video.title) {
+      <article class="card">
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.description }}</p>
+        <span class="chip">Duración: {{ video.duration }}</span>
+      </article>
+    }
+  </div>
+</section>

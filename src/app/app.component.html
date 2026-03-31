@@ -1,86 +1,46 @@
-<header class="hero">
-  <div class="hero__content">
-    <p class="eyebrow">Migración completada</p>
-    <h1>Se recuperó la estructura y la data principal del portafolio</h1>
-    <p>
-      Ahora tienes vistas independientes para <strong>Cursos</strong>, <strong>Proyectos</strong> (con mini visualizador)
-      y <strong>CV</strong>, para que cada bloque de información se consulte sin mezclar contenido.
-    </p>
-  </div>
-</header>
+<div class="app-shell" [class.app-shell--light]="activeTheme === 'light'">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Portafolio</p>
+      <h1>Home, videos, blog y CV en componentes separados</h1>
+      <p class="subtitle">También puedes alternar entre modo oscuro y claro.</p>
+    </div>
 
-<nav class="views-nav" aria-label="Secciones principales">
-  @for (view of views; track view.id) {
-    <button
-      type="button"
-      class="views-nav__btn"
-      [class.views-nav__btn--active]="activeView === view.id"
-      (click)="setView(view.id)"
-    >
-      {{ view.label }}
+    <button type="button" class="theme-btn" (click)="toggleTheme()">
+      Cambiar a modo {{ activeTheme === 'dark' ? 'claro' : 'oscuro' }}
     </button>
-  }
-</nav>
+  </header>
 
-<main class="content">
-  @switch (activeView) {
-    @case ('inicio') {
-      <section class="panel">
-        <h2>Estado actual</h2>
-        <p>
-          Se restauró una base de contenido para evitar pérdida de contexto después de la migración.
-          Desde aquí puedes seguir alimentando datos reales de cursos, logros y experiencia.
-        </p>
-      </section>
+  <nav class="views-nav" aria-label="Secciones principales">
+    @for (view of views; track view.id) {
+      <button
+        type="button"
+        class="views-nav__btn"
+        [class.views-nav__btn--active]="activeView === view.id"
+        (click)="setView(view.id)"
+      >
+        {{ view.label }}
+      </button>
     }
+  </nav>
 
-    @case ('cursos') {
-      <section class="panel">
-        <h2>Sección de cursos por categorías</h2>
-        <div class="categories">
-          @for (category of courseCategories; track category.title) {
-            <article class="card">
-              <h3>{{ category.title }}</h3>
-              <ul>
-                @for (course of category.courses; track course) {
-                  <li>{{ course }}</li>
-                }
-              </ul>
-            </article>
-          }
-        </div>
-      </section>
-    }
+  <main class="content">
+    @switch (activeView) {
+      @case ('home') {
+        <app-home />
+      }
 
-    @case ('proyectos') {
-      <section class="panel panel--projects">
-        <div>
-          <h2>Proyectos</h2>
-          <p>Incluye un mini visualizador 3D para reforzar la parte visual del portafolio.</p>
-          <div class="projects-list">
-            @for (project of projects; track project.title) {
-              <article class="card">
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.summary }}</p>
-                <p><strong>Stack:</strong> {{ project.stack }}</p>
-                <p><strong>Resultado:</strong> {{ project.result }}</p>
-              </article>
-            }
-          </div>
-        </div>
-        <div #canvasHost class="visualizer" aria-label="Mini visualizador 3D"></div>
-      </section>
-    }
+      @case ('videos') {
+        <app-videos />
+      }
 
-    @case ('cv') {
-      <section class="panel">
-        <h2>CV</h2>
-        <ul class="cv-list">
-          @for (item of cvItems; track item) {
-            <li>{{ item }}</li>
-          }
-        </ul>
-      </section>
+      @case ('blog') {
+        <app-blog />
+      }
+
+      @case ('cv') {
+        <app-cv />
+      }
     }
-  }
-</main>
+  </main>
+</div>
