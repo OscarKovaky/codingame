@@ -42,4 +42,53 @@
       }
     }
   </main>
+
+  <button
+    type="button"
+    class="chat-fab"
+    [attr.aria-expanded]="isChatOpen"
+    (click)="toggleChat()"
+  >
+    {{ isChatOpen ? 'Cerrar chat' : 'Chat rápido' }}
+  </button>
+
+  @if (isChatOpen) {
+    <section class="chat-widget panel" aria-label="Chat de contacto rápido">
+      <h2>¿Hablamos?</h2>
+      <p class="chat-widget__note">
+        Déjame tu mensaje aquí y luego lo conectamos para que llegue directo a mi celular.
+      </p>
+
+      @if (chatHints.length > 0) {
+        <div class="chat-widget__history">
+          <p>Últimos mensajes capturados:</p>
+          <ul>
+            @for (msg of chatHints; track msg) {
+              <li>{{ msg }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      <label class="chat-widget__label" for="chat-message">Mensaje</label>
+      <textarea
+        id="chat-message"
+        class="chat-widget__input"
+        rows="3"
+        [value]="chatMessage"
+        (input)="updateChatMessage($any($event.target).value)"
+        placeholder="Hola, me interesa cotizar un proyecto..."
+      ></textarea>
+
+      <div class="chat-widget__actions">
+        <button type="button" class="views-nav__btn views-nav__btn--active" (click)="sendChatMessage()">
+          Guardar mensaje
+        </button>
+
+        <a class="theme-btn chat-widget__link" [href]="whatsappUrl" target="_blank" rel="noopener">
+          Abrir WhatsApp
+        </a>
+      </div>
+    </section>
+  }
 </div>

@@ -25,9 +25,9 @@ npm run build
 
 Se agregó una pipeline de GitHub Actions en `.github/workflows/render-deploy.yml` que:
 
-1. Instala dependencias.
-2. Compila Angular con configuración `render` (`baseHref: /`).
-3. Dispara un deploy hook de Render si existe el secreto `RENDER_DEPLOY_HOOK_URL`.
+1. En cada `pull_request` hacia `main`, instala dependencias y compila Angular con configuración `render` (`baseHref: /`) para validar la integración.
+2. En cada `push` a `main`, vuelve a compilar y dispara el deploy hook de Render.
+3. Requiere el secreto `RENDER_DEPLOY_HOOK_URL` para garantizar despliegue automático en cada integración a `main`.
 
 Para probar localmente el build que usa Render:
 

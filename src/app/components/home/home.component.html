@@ -7,6 +7,10 @@
   </div>
 
   <canvas #threeCanvas class="three-canvas" aria-label="Animación 3D decorativa"></canvas>
+
+  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
+    <p>Espacio publicitario</p>
+  </aside>
 </section>
 
 <section class="panel metrics">
@@ -17,10 +21,14 @@
       <p class="metric-label">{{ metric.label }}</p>
     </article>
   }
+
+  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
+    <p>Espacio publicitario</p>
+  </aside>
 </section>
 
 <section class="panel">
-  <h3>Servicios (dummy)</h3>
+  <h3>Servicios</h3>
   <div class="cards-grid">
     @for (service of serviceCards; track service.title) {
       <article class="card reveal-card">
@@ -30,6 +38,10 @@
       </article>
     }
   </div>
+
+  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
+    <p>Espacio publicitario</p>
+  </aside>
 </section>
 
 <section class="panel">
@@ -44,4 +56,8 @@
       </article>
     }
   </div>
+
+  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
+    <p>Espacio publicitario</p>
+  </aside>
 </section>
