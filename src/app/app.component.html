@@ -1,19 +1,86 @@
 <header class="hero">
   <div class="hero__content">
     <p class="eyebrow">Migración completada</p>
-    <h1>Portafolio en Angular + Three.js</h1>
+    <h1>Se recuperó la estructura y la data principal del portafolio</h1>
     <p>
-      Se reorganizó el sitio por secciones modulares y se integró un bloque 3D para reforzar la parte visual.
+      Ahora tienes vistas independientes para <strong>Cursos</strong>, <strong>Proyectos</strong> (con mini visualizador)
+      y <strong>CV</strong>, para que cada bloque de información se consulte sin mezclar contenido.
     </p>
   </div>
-  <div #canvasHost class="hero__visual" aria-label="Animación 3D decorativa"></div>
 </header>
 
-<main class="sections">
-  @for (section of sections; track section.title) {
-    <section class="card">
-      <h2>{{ section.title }}</h2>
-      <p>{{ section.description }}</p>
-    </section>
+<nav class="views-nav" aria-label="Secciones principales">
+  @for (view of views; track view.id) {
+    <button
+      type="button"
+      class="views-nav__btn"
+      [class.views-nav__btn--active]="activeView === view.id"
+      (click)="setView(view.id)"
+    >
+      {{ view.label }}
+    </button>
+  }
+</nav>
+
+<main class="content">
+  @switch (activeView) {
+    @case ('inicio') {
+      <section class="panel">
+        <h2>Estado actual</h2>
+        <p>
+          Se restauró una base de contenido para evitar pérdida de contexto después de la migración.
+          Desde aquí puedes seguir alimentando datos reales de cursos, logros y experiencia.
+        </p>
+      </section>
+    }
+
+    @case ('cursos') {
+      <section class="panel">
+        <h2>Sección de cursos por categorías</h2>
+        <div class="categories">
+          @for (category of courseCategories; track category.title) {
+            <article class="card">
+              <h3>{{ category.title }}</h3>
+              <ul>
+                @for (course of category.courses; track course) {
+                  <li>{{ course }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    @case ('proyectos') {
+      <section class="panel panel--projects">
+        <div>
+          <h2>Proyectos</h2>
+          <p>Incluye un mini visualizador 3D para reforzar la parte visual del portafolio.</p>
+          <div class="projects-list">
+            @for (project of projects; track project.title) {
+              <article class="card">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.summary }}</p>
+                <p><strong>Stack:</strong> {{ project.stack }}</p>
+                <p><strong>Resultado:</strong> {{ project.result }}</p>
+              </article>
+            }
+          </div>
+        </div>
+        <div #canvasHost class="visualizer" aria-label="Mini visualizador 3D"></div>
+      </section>
+    }
+
+    @case ('cv') {
+      <section class="panel">
+        <h2>CV</h2>
+        <ul class="cv-list">
+          @for (item of cvItems; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </section>
+    }
   }
 </main>
