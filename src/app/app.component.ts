@@ -24,6 +24,12 @@ export class AppComponent {
 
   activeView: AppView = 'home';
   activeTheme: Theme = 'dark';
+  isChatOpen = false;
+  chatMessage = '';
+  readonly phoneLeadMessage =
+    'Hola, te escribo desde el portafolio y me interesa una propuesta. ¿Podemos hablar por WhatsApp?';
+  readonly chatHints: string[] = [];
+  readonly whatsappUrl = `https://wa.me/?text=${encodeURIComponent(this.phoneLeadMessage)}`;
 
   setView(view: AppView): void {
     this.activeView = view;
@@ -31,5 +37,24 @@ export class AppComponent {
 
   toggleTheme(): void {
     this.activeTheme = this.activeTheme === 'dark' ? 'light' : 'dark';
+  }
+
+  toggleChat(): void {
+    this.isChatOpen = !this.isChatOpen;
+  }
+
+  updateChatMessage(value: string): void {
+    this.chatMessage = value;
+  }
+
+  sendChatMessage(): void {
+    const message = this.chatMessage.trim();
+    if (!message) {
+      return;
+    }
+
+    this.chatHints.unshift(message);
+    this.chatHints.splice(3);
+    this.chatMessage = '';
   }
 }

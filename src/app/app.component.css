@@ -83,6 +83,88 @@ h1 {
   padding: 0 clamp(1rem, 3vw, 3rem) 2rem;
 }
 
+.chat-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  border: 1px solid var(--accent-color);
+  background: color-mix(in oklab, var(--accent-color) 20%, var(--surface-strong));
+  color: var(--text-color);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-widget {
+  position: fixed;
+  right: 1rem;
+  bottom: 4.5rem;
+  width: min(330px, calc(100vw - 2rem));
+  z-index: 30;
+}
+
+.chat-widget h2 {
+  margin-bottom: 0.5rem;
+}
+
+.chat-widget__note {
+  margin: 0 0 0.8rem;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+.chat-widget__history {
+  margin-bottom: 0.8rem;
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.65rem;
+  background: color-mix(in oklab, var(--surface-strong) 82%, transparent);
+}
+
+.chat-widget__history p {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+}
+
+.chat-widget__history ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.chat-widget__label {
+  display: inline-block;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+
+.chat-widget__input {
+  width: 100%;
+  resize: vertical;
+  min-height: 78px;
+  border: 1px solid var(--border-color);
+  border-radius: 0.65rem;
+  padding: 0.6rem 0.7rem;
+  background: var(--surface-strong);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.chat-widget__actions {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.chat-widget__link {
+  text-decoration: none;
+}
+
 @media (max-width: 700px) {
   .hero {
     flex-direction: column;

@@ -4,7 +4,17 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
+
+concurrency:
+  group: render-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -21,7 +31,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Angular app for Render
         run: npm run build:render
@@ -32,12 +42,17 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Trigger Render deploy hook
+      - name: Validate Render deploy hook
         env:
           RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
-            echo "RENDER_DEPLOY_HOOK_URL no está configurado. Se omite el deploy automático."
-            exit 0
+            echo "Falta el secreto RENDER_DEPLOY_HOOK_URL."
+            echo "Configúralo en Settings > Secrets and variables > Actions para desplegar en cada integración a main."
+            exit 1
           fi
-          curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK_URL"
+
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK_URL"
