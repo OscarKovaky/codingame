@@ -1,0 +1,141 @@
+﻿:host {
+  display: block;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.service-card {
+  --service-accent: #4da2ff;
+  position: relative;
+  overflow: hidden;
+  grid-column: span 4;
+  min-height: 240px;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--service-accent) 22%, var(--border-color));
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--surface-strong) 90%, transparent), var(--surface-strong)),
+    radial-gradient(circle at top right, color-mix(in oklab, var(--service-accent) 32%, transparent), transparent 55%);
+  box-shadow: 0 20px 45px rgba(2, 10, 25, 0.16);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.service-card--featured {
+  grid-column: span 6;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in oklab, var(--service-accent) 48%, var(--border-color));
+  box-shadow: 0 28px 55px rgba(2, 10, 25, 0.22);
+}
+
+.service-card__glow {
+  position: absolute;
+  inset: auto -8% -18% auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in oklab, var(--service-accent) 58%, transparent), transparent 68%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.service-card__header,
+.service-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.service-card__badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--service-accent) 14%, rgba(255, 255, 255, 0.08));
+  color: var(--text-color);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card__icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 1.1rem;
+  background: color-mix(in oklab, var(--service-accent) 16%, rgba(255, 255, 255, 0.08));
+  border: 1px solid color-mix(in oklab, var(--service-accent) 32%, transparent);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.service-card__body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.service-card__body h4,
+.service-card__body p,
+.service-card__cta {
+  margin: 0;
+}
+
+.service-card__body h4 {
+  font-size: 1.2rem;
+}
+
+.service-card__body p {
+  max-width: 32ch;
+  color: var(--muted-color);
+  line-height: 1.6;
+}
+
+.service-card__footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.35rem;
+}
+
+.service-card__cta {
+  color: color-mix(in oklab, var(--service-accent) 72%, white);
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .service-card,
+  .service-card--featured {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card,
+  .service-card--featured {
+    grid-column: auto;
+    min-height: auto;
+  }
+
+  .service-card__body p {
+    max-width: none;
+  }
+}

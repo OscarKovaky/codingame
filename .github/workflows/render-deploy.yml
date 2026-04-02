@@ -1,20 +1,19 @@
-name: Render Angular Pipeline
+﻿name: Deploy Angular to GitHub Pages
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 concurrency:
-  group: render-deploy-${{ github.ref }}
+  group: github-pages
   cancel-in-progress: true
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -30,29 +29,31 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Angular app for Render
-        run: npm run build:render
+      - name: Build Angular app for GitHub Pages
+        run: npm run build:pages -- --base-href "/${{ github.event.repository.name }}/"
+
+      - name: Enable SPA fallback
+        run: cp dist/portafolio-angular-three/browser/index.html dist/portafolio-angular-three/browser/404.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/portafolio-angular-three/browser
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Validate Render deploy hook
-        env:
-          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
-            echo "Falta el secreto RENDER_DEPLOY_HOOK_URL."
-            echo "Configúralo en Settings > Secrets and variables > Actions para desplegar en cada integración a main."
-            exit 1
-          fi
-
-      - name: Trigger Render deploy hook
-        env:
-          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK_URL"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

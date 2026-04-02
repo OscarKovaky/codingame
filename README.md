@@ -1,47 +1,72 @@
-# Portafolio en Angular + Three.js
+﻿# Portafolio Angular standalone
 
-Migración base de un portafolio a Angular standalone con integración de Three.js para el hero principal.
+Portafolio personal con Angular standalone, Three.js para el hero y una base de chatbot pensada para funcionar en GitHub Pages sin exponer secretos en frontend.
 
-## Ejecutar
+## Correr local
 
-1. Instala dependencias:
-   ```bash
-   npm install
-   ```
-2. Levanta el servidor:
-   ```bash
-   npm run start
-   ```
+```bash
+npm ci
+npm start
+```
 
-## Deploy en GitHub Pages
+La app queda disponible en `http://localhost:4200/`.
 
-Para publicar en `https://oscarkovaky.github.io/codingame/`, compila con configuración de producción (incluye `baseHref` para `/codingame/`):
+## Build
+
+Build local estándar:
 
 ```bash
 npm run build
 ```
 
-## Pipeline para Render
-
-Se agregó una pipeline de GitHub Actions en `.github/workflows/render-deploy.yml` que:
-
-1. En cada `pull_request` hacia `main`, instala dependencias y compila Angular con configuración `render` (`baseHref: /`) para validar la integración.
-2. En cada `push` a `main`, vuelve a compilar y dispara el deploy hook de Render.
-3. Requiere el secreto `RENDER_DEPLOY_HOOK_URL` para garantizar despliegue automático en cada integración a `main`.
-
-Para probar localmente el build que usa Render:
+Build pensado para GitHub Pages:
 
 ```bash
-npm run build:render
+npm run build:pages
 ```
 
-También se incluye `render.yaml` para crear el servicio estático en Render usando:
+Si tu repositorio no se llama `codingame`, puedes sobreescribir el `base-href` sin tocar código:
 
-- `buildCommand`: `npm install && npm run build:render`
-- `staticPublishPath`: `dist/portafolio-angular-three/browser`
+```bash
+npm run build:pages -- --base-href "/NOMBRE_DEL_REPO/"
+```
 
-## Estructura
+## Publicar en GitHub Pages
 
-- `src/app/app.component.ts`: layout principal y lógica Three.js.
-- `src/app/app.component.html`: hero y secciones dinámicas.
-- `src/app/app.component.css`: estilos de componentes.
+1. Activa GitHub Pages en el repositorio usando `GitHub Actions` como source.
+2. Haz push a `main`.
+3. El workflow compila en producción usando el nombre real del repositorio como `base-href`.
+4. Durante el build se copia `index.html` a `404.html` para que GitHub Pages soporte la experiencia SPA en subpath.
+5. El artifact generado se despliega automáticamente.
+
+## Chatbot en modo estático
+
+Lo que sí funciona en GitHub Pages:
+
+- Widget flotante moderno y responsive.
+- Historial con persistencia en `localStorage`.
+- Respuestas por FAQs e intents locales.
+- Botones rápidos para cotización, servicios, trabajos y WhatsApp.
+- Captura básica de lead: nombre, negocio/proyecto y necesidad.
+- Fallback automático a modo local si no existe endpoint externo.
+
+Limitaciones del modo estático:
+
+- No usa IA real.
+- No sincroniza conversaciones entre dispositivos.
+- No guarda leads en servidor.
+- No puede consultar datos externos en tiempo real.
+
+## Conectar un backend real después
+
+La arquitectura ya deja dos adaptadores:
+
+- `LocalFaqChatAdapter`: demo 100% estática compatible con Pages.
+- `ExternalApiChatAdapter`: punto de integración para backend real.
+
+Para conectar un backend:
+
+1. Configura `externalEndpoint` en `src/environments/environment.production.ts`.
+2. Cambia `mode` a `external` o deja `auto` para usar el endpoint cuando exista.
+3. Implementa el backend para recibir `message`, `lead` e `history` y responder con el contrato del adapter.
+4. Mantén cualquier token o credencial únicamente en backend. No se debe exponer ninguna API key en Angular.

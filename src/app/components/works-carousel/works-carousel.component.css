@@ -1,0 +1,219 @@
+﻿:host {
+  display: block;
+}
+
+.works-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.carousel-shell {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.carousel-shell__track {
+  position: relative;
+  min-height: 360px;
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+.carousel-shell__arrow {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.carousel-shell__arrow:hover,
+.carousel-shell__arrow:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--accent-color);
+}
+
+.work-slide {
+  --slide-accent: #4da2ff;
+  --offset: 0;
+  --translate-y: 0px;
+  --rotate-y: 0deg;
+  --scale: 1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(310px, 72vw);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform:
+    translateX(calc(-50% + (var(--offset) * 62%)))
+    translateY(var(--translate-y))
+    rotateY(var(--rotate-y))
+    scale(var(--scale));
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition:
+    transform 0.42s ease,
+    opacity 0.42s ease;
+}
+
+.work-slide__visual {
+  display: grid;
+  align-content: space-between;
+  min-height: 320px;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--slide-accent) 24%, var(--border-color));
+  border-radius: 1.75rem;
+  color: var(--text-color);
+  background:
+    linear-gradient(170deg, color-mix(in oklab, var(--slide-accent) 22%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in oklab, var(--surface-strong) 88%, transparent), var(--surface-strong));
+  box-shadow: 0 24px 50px rgba(3, 10, 25, 0.2);
+  text-align: left;
+}
+
+.work-slide--active .work-slide__visual {
+  border-color: color-mix(in oklab, var(--slide-accent) 52%, var(--border-color));
+}
+
+.work-slide__pill {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--slide-accent) 14%, rgba(255, 255, 255, 0.08));
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.work-slide__icon {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 1.25rem;
+  background: color-mix(in oklab, var(--slide-accent) 18%, rgba(255, 255, 255, 0.08));
+  border: 1px solid color-mix(in oklab, var(--slide-accent) 34%, transparent);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.work-slide__preview {
+  max-width: 20ch;
+  color: color-mix(in oklab, var(--text-color) 88%, var(--muted-color));
+  line-height: 1.6;
+}
+
+.work-slide__title {
+  display: block;
+  margin-top: 0.9rem;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.work-preview {
+  --preview-accent: #4da2ff;
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border-color: color-mix(in oklab, var(--preview-accent) 24%, var(--border-color));
+}
+
+.work-preview__eyebrow {
+  margin: 0;
+  color: color-mix(in oklab, var(--preview-accent) 70%, white);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+}
+
+.work-preview h4,
+.work-preview__summary {
+  margin: 0;
+}
+
+.work-preview__summary {
+  color: var(--muted-color);
+  line-height: 1.7;
+}
+
+.work-preview__meta,
+.work-preview__tags {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.work-preview__chip,
+.work-preview__tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--preview-accent) 12%, rgba(255, 255, 255, 0.08));
+  border: 1px solid color-mix(in oklab, var(--preview-accent) 24%, transparent);
+  font-size: 0.84rem;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.carousel-dots__dot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--muted-color) 55%, transparent);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.carousel-dots__dot--active {
+  transform: scale(1.25);
+  background: var(--accent-color);
+}
+
+@media (max-width: 700px) {
+  .carousel-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-shell__arrow {
+    display: none;
+  }
+
+  .carousel-shell__track {
+    min-height: 315px;
+  }
+
+  .work-slide {
+    width: min(290px, 84vw);
+    transform:
+      translateX(calc(-50% + (var(--offset) * 56%)))
+      translateY(var(--translate-y))
+      scale(var(--scale));
+  }
+
+  .work-slide__visual {
+    min-height: 280px;
+  }
+}

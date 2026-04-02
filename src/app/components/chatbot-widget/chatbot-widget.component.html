@@ -1,0 +1,92 @@
+﻿<button
+  type="button"
+  class="chat-fab"
+  [attr.aria-expanded]="isOpen"
+  aria-controls="portfolio-chat-widget"
+  [attr.aria-label]="isOpen ? 'Cerrar chat de contacto' : 'Abrir chat de contacto'"
+  (click)="toggle()"
+>
+  <span class="chat-fab__badge" aria-hidden="true">AI</span>
+  <span>{{ isOpen ? 'Cerrar chat' : 'Abrir chat' }}</span>
+</button>
+
+@if (isOpen) {
+  <section id="portfolio-chat-widget" class="chat-widget panel" aria-label="Chatbot del portafolio">
+    <header class="chat-widget__header">
+      <div>
+        <p class="chat-widget__eyebrow">Asistente del portafolio</p>
+        <h2>Conversemos sobre tu proyecto</h2>
+      </div>
+
+      <a
+        class="chat-widget__whatsapp"
+        [href]="whatsappUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir conversación por WhatsApp"
+      >
+        WhatsApp
+      </a>
+    </header>
+
+    <div #messagesViewport class="chat-widget__messages" aria-live="polite">
+      @for (message of messages; track message.id) {
+        <article class="chat-bubble" [class.chat-bubble--user]="message.sender === 'user'">
+          <p>{{ message.text }}</p>
+          <span>{{ message.timestamp }}</span>
+        </article>
+      }
+
+      @if (isLoading) {
+        <article class="chat-bubble">
+          <p>Escribiendo respuesta...</p>
+        </article>
+      }
+    </div>
+
+    <div class="chat-widget__quick-replies" aria-label="Accesos rápidos del chat">
+      @for (reply of quickReplies; track reply.id) {
+        <button type="button" (click)="handleQuickReply(reply)">
+          {{ reply.label }}
+        </button>
+      }
+    </div>
+
+    <label class="chat-widget__label" for="portfolio-chat-input">
+      {{ pendingLeadField ? 'Responde este dato' : 'Escribe tu mensaje' }}
+    </label>
+
+    <textarea
+      id="portfolio-chat-input"
+      class="chat-widget__input"
+      rows="3"
+      [(ngModel)]="draftMessage"
+      [attr.placeholder]="
+        pendingLeadField === 'name'
+          ? 'Tu nombre'
+          : pendingLeadField === 'business'
+            ? 'Nombre de tu negocio o proyecto'
+            : pendingLeadField === 'need'
+              ? 'Qué necesitas resolver'
+              : 'Ej. Quiero una cotización para una landing'
+      "
+      aria-label="Mensaje para el chatbot"
+      (keydown)="onMessageKeydown($event)"
+    ></textarea>
+
+    <div class="chat-widget__actions">
+      <button
+        type="button"
+        class="button-link button-link--primary"
+        [disabled]="!canSend"
+        (click)="send()"
+      >
+        Enviar
+      </button>
+
+      <a class="button-link button-link--ghost" [href]="whatsappUrl" target="_blank" rel="noopener noreferrer">
+        Ir a WhatsApp
+      </a>
+    </div>
+  </section>
+}

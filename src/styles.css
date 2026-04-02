@@ -1,42 +1,63 @@
-* {
+﻿* {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  background: #07111f;
+}
+
+button,
+textarea,
+a {
+  font: inherit;
+}
+
+button:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .panel {
   border: 1px solid var(--border-color);
-  border-radius: 0.85rem;
+  border-radius: 1.5rem;
   background: var(--surface-color);
-  backdrop-filter: blur(8px);
-  padding: 1.25rem;
+  backdrop-filter: blur(18px);
+  padding: 1.4rem;
 }
 
-.card {
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  background: var(--surface-strong);
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid transparent;
 }
 
-h2 {
-  margin-top: 0;
+.button-link--primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-color), color-mix(in oklab, var(--accent-color) 48%, #ffffff));
 }
 
-.ad-slot {
-  margin-top: 1rem;
-  padding: 0.6rem 0.8rem;
-  border: 1px dashed var(--border-color);
-  border-radius: 0.65rem;
-  text-align: center;
+.button-link--ghost {
+  color: var(--text-color);
+  border-color: var(--border-color);
+  background: transparent;
+}
+
+.button-link--muted {
   color: var(--muted-color);
-  font-size: 0.82rem;
-  background: color-mix(in oklab, var(--surface-strong) 60%, transparent);
-}
-
-.ad-slot p {
-  margin: 0;
+  border-color: var(--border-color);
+  background: transparent;
 }

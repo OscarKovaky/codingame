@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 export interface PortfolioMetric {
@@ -13,9 +13,9 @@ export interface PortfolioMetric {
 export class PortfolioMetricsService {
   getHighlights(): Observable<PortfolioMetric[]> {
     return of([
-      { label: 'Proyectos', value: '12', icon: '🧪' },
-      { label: 'Servicios activos', value: '6', icon: '⚙️' },
-      { label: 'Tiempo de carga', value: '< 1s', icon: '⏱️' }
+      { label: 'Proyectos ejecutados', value: '12+', icon: '01' },
+      { label: 'Servicios activos', value: '6', icon: '02' },
+      { label: 'Tiempo de carga', value: '< 1s', icon: '03' }
     ]);
   }
 }

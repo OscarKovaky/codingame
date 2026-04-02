@@ -1,0 +1,30 @@
+﻿<div class="services-grid">
+  @for (service of services; track service.title; let index = $index) {
+    <article
+      class="service-card"
+      [class.service-card--featured]="index === 0 || index === 3"
+      [style.--service-accent]="service.accent"
+    >
+      <div class="service-card__glow" aria-hidden="true"></div>
+
+      <header class="service-card__header">
+        @if (service.badge) {
+          <span class="service-card__badge">{{ service.badge }}</span>
+        }
+
+        <div class="service-card__icon" aria-hidden="true">{{ service.icon }}</div>
+      </header>
+
+      <div class="service-card__body">
+        <h4>{{ service.title }}</h4>
+        <p>{{ service.description }}</p>
+      </div>
+
+      @if (service.ctaLabel) {
+        <div class="service-card__footer">
+          <span class="service-card__cta">{{ service.ctaLabel }}</span>
+        </div>
+      }
+    </article>
+  }
+</div>

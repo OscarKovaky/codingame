@@ -1,10 +1,11 @@
-{
+﻿{
   "name": "portafolio-angular-three",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
+    "build:pages": "ng build --configuration=production",
     "test": "ng test",
     "build:render": "ng build --configuration=render"
   },

@@ -1,0 +1,86 @@
+﻿<div class="works-layout">
+  <div class="carousel-shell">
+    <button
+      type="button"
+      class="carousel-shell__arrow"
+      aria-label="Mostrar trabajo anterior"
+      (click)="previous()"
+    >
+      ‹
+    </button>
+
+    <div class="carousel-shell__track" aria-label="Carrusel de proyectos destacados">
+      @for (work of works; track work.title; let index = $index) {
+        <button
+          type="button"
+          class="work-slide"
+          [class.work-slide--active]="index === activeIndex"
+          [style.--slide-accent]="work.accent"
+          [style.--offset]="offsetFor(index)"
+          [style.--translate-y]="translateYFor(index)"
+          [style.--rotate-y]="rotateFor(index)"
+          [style.--scale]="scaleFor(index)"
+          [style.opacity]="opacityFor(index)"
+          [style.z-index]="zIndexFor(index)"
+          [attr.aria-label]="'Seleccionar ' + work.title"
+          (click)="select(index)"
+        >
+          <span class="work-slide__visual" aria-hidden="true">
+            <span class="work-slide__pill">{{ work.type }}</span>
+            <span class="work-slide__icon">{{ work.icon }}</span>
+            <span class="work-slide__preview">{{ work.previewText }}</span>
+          </span>
+          <span class="work-slide__title">{{ work.title }}</span>
+        </button>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="carousel-shell__arrow"
+      aria-label="Mostrar siguiente trabajo"
+      (click)="next()"
+    >
+      ›
+    </button>
+  </div>
+
+  @if (activeWork; as work) {
+    <aside class="work-preview panel" [style.--preview-accent]="work.accent">
+      <p class="work-preview__eyebrow">Proyecto activo</p>
+      <h4>{{ work.title }}</h4>
+      <p class="work-preview__summary">{{ work.summary }}</p>
+
+      <div class="work-preview__meta">
+        <span class="work-preview__chip">{{ work.type }}</span>
+        <span class="work-preview__chip">{{ work.stack }}</span>
+      </div>
+
+      <div class="work-preview__tags" aria-label="Tecnologías y etiquetas del proyecto">
+        @for (tag of work.tags; track tag) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+
+      @if (work.url) {
+        <a class="button-link button-link--primary" [href]="work.url" target="_blank" rel="noopener noreferrer">
+          {{ work.ctaLabel || 'Abrir proyecto' }}
+        </a>
+      } @else {
+        <span class="button-link button-link--muted">{{ work.ctaLabel || 'Proyecto bajo solicitud' }}</span>
+      }
+    </aside>
+  }
+
+  <div class="carousel-dots" aria-label="Indicadores de trabajos">
+    @for (work of works; track work.title; let index = $index) {
+      <button
+        type="button"
+        class="carousel-dots__dot"
+        [class.carousel-dots__dot--active]="index === activeIndex"
+        [attr.aria-label]="'Ir al trabajo ' + work.title"
+        (click)="select(index)"
+      ></button>
+    }
+  </div>
+</div>

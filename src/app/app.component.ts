@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
+import { BlogComponent } from './components/blog/blog.component';
+import { ChatbotWidgetComponent } from './components/chatbot-widget/chatbot-widget.component';
+import { CvComponent } from './components/cv/cv.component';
 import { HomeComponent } from './components/home/home.component';
 import { VideosComponent } from './components/videos/videos.component';
-import { BlogComponent } from './components/blog/blog.component';
-import { CvComponent } from './components/cv/cv.component';
 
 type AppView = 'home' | 'videos' | 'blog' | 'cv';
 type Theme = 'dark' | 'light';
+type SectionTarget = 'services' | 'works';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, VideosComponent, BlogComponent, CvComponent],
+  imports: [HomeComponent, VideosComponent, BlogComponent, CvComponent, ChatbotWidgetComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -24,12 +26,10 @@ export class AppComponent {
 
   activeView: AppView = 'home';
   activeTheme: Theme = 'dark';
-  isChatOpen = false;
-  chatMessage = '';
-  readonly phoneLeadMessage =
-    'Hola, te escribo desde el portafolio y me interesa una propuesta. ¿Podemos hablar por WhatsApp?';
-  readonly chatHints: string[] = [];
-  readonly whatsappUrl = `https://wa.me/?text=${encodeURIComponent(this.phoneLeadMessage)}`;
+
+  get isDarkTheme(): boolean {
+    return this.activeTheme === 'dark';
+  }
 
   setView(view: AppView): void {
     this.activeView = view;
@@ -39,22 +39,12 @@ export class AppComponent {
     this.activeTheme = this.activeTheme === 'dark' ? 'light' : 'dark';
   }
 
-  toggleChat(): void {
-    this.isChatOpen = !this.isChatOpen;
-  }
+  goToHomeSection(target: SectionTarget): void {
+    this.activeView = 'home';
 
-  updateChatMessage(value: string): void {
-    this.chatMessage = value;
-  }
-
-  sendChatMessage(): void {
-    const message = this.chatMessage.trim();
-    if (!message) {
-      return;
-    }
-
-    this.chatHints.unshift(message);
-    this.chatHints.splice(3);
-    this.chatMessage = '';
+    requestAnimationFrame(() => {
+      const sectionId = target === 'services' ? 'services-section' : 'works-section';
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 }

@@ -1,18 +1,33 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
-import { PortfolioDataService, ServiceCard, WorkCard } from '../../services/portfolio-data.service';
+﻿import { Component, inject } from '@angular/core';
 import { PortfolioMetric, PortfolioMetricsService } from '../../services/portfolio-metrics.service';
-import * as THREE from 'three';
+import { PortfolioDataService, ServiceCard, WorkCard } from '../../services/portfolio-data.service';
+import { ServicesShowcaseComponent } from '../services-showcase/services-showcase.component';
+import { WorksCarouselComponent } from '../works-carousel/works-carousel.component';
+
+type CodeTokenType = 'keyword' | 'variable' | 'function' | 'property' | 'string' | 'punctuation' | 'plain' | 'indent';
+
+interface CodeToken {
+  text: string;
+  type: CodeTokenType;
+}
+
+interface CodePreviewLine {
+  tokens: CodeToken[];
+}
+
+interface HeroHighlight {
+  label: string;
+  accent: string;
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [ServicesShowcaseComponent, WorksCarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('threeCanvas', { static: true })
-  private readonly threeCanvas?: ElementRef<HTMLCanvasElement>;
-
+export class HomeComponent {
   private readonly portfolioDataService = inject(PortfolioDataService);
   private readonly portfolioMetricsService = inject(PortfolioMetricsService);
 
@@ -22,83 +37,86 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     description: ''
   };
 
+  readonly heroHighlights: HeroHighlight[] = [
+    { label: 'Experiencias responsivas', accent: '#8b5cff' },
+    { label: 'Diseño premium', accent: '#ff70bf' },
+    { label: 'Implementación limpia', accent: '#59d7ff' }
+  ];
+
+  readonly technologies: HeroHighlight[] = [
+    { label: 'Angular', accent: '#ff6a95' },
+    { label: 'TypeScript', accent: '#59d7ff' },
+    { label: 'HTML5', accent: '#ffb45d' },
+    { label: 'CSS3', accent: '#8b5cff' },
+    { label: 'Responsive UI', accent: '#5be7b2' },
+    { label: 'SEO técnico', accent: '#ffd76c' }
+  ];
+
+  readonly codePreviewLines: CodePreviewLine[] = [
+    {
+      tokens: [
+        { text: 'const', type: 'keyword' },
+        { text: ' ', type: 'plain' },
+        { text: 'brand', type: 'variable' },
+        { text: ' = ', type: 'plain' },
+        { text: 'createExperience', type: 'function' },
+        { text: '({', type: 'punctuation' }
+      ]
+    },
+    {
+      tokens: [
+        { text: '  ', type: 'indent' },
+        { text: 'name', type: 'property' },
+        { text: ': ', type: 'plain' },
+        { text: "'Oscar Ramirez'", type: 'string' },
+        { text: ',', type: 'punctuation' }
+      ]
+    },
+    {
+      tokens: [
+        { text: '  ', type: 'indent' },
+        { text: 'focus', type: 'property' },
+        { text: ': [', type: 'plain' },
+        { text: "'Angular'", type: 'string' },
+        { text: ', ', type: 'punctuation' },
+        { text: "'UI'", type: 'string' },
+        { text: ', ', type: 'punctuation' },
+        { text: "'Responsive'", type: 'string' },
+        { text: '],', type: 'punctuation' }
+      ]
+    },
+    {
+      tokens: [
+        { text: '  ', type: 'indent' },
+        { text: 'goal', type: 'property' },
+        { text: ': ', type: 'plain' },
+        { text: "'Convertir visitas en clientes'", type: 'string' }
+      ]
+    },
+    {
+      tokens: [{ text: '});', type: 'punctuation' }]
+    },
+    {
+      tokens: []
+    },
+    {
+      tokens: [
+        { text: 'launchProject', type: 'function' },
+        { text: '(', type: 'punctuation' },
+        { text: 'brand', type: 'variable' },
+        { text: ');', type: 'punctuation' }
+      ]
+    }
+  ];
+
   serviceCards: ServiceCard[] = [];
   workCards: WorkCard[] = [];
   metrics: PortfolioMetric[] = [];
-
-  private scene?: THREE.Scene;
-  private camera?: THREE.PerspectiveCamera;
-  private renderer?: THREE.WebGLRenderer;
-  private torus?: THREE.Mesh;
-  private animationFrameId?: number;
 
   constructor() {
     this.portfolioDataService.getIntro().subscribe((intro) => Object.assign(this.intro, intro));
     this.portfolioDataService.getServices().subscribe((services) => (this.serviceCards = services));
     this.portfolioDataService.getWork().subscribe((work) => (this.workCards = work));
     this.portfolioMetricsService.getHighlights().subscribe((metrics) => (this.metrics = metrics));
-  }
-
-  ngAfterViewInit(): void {
-    const canvas = this.threeCanvas?.nativeElement;
-
-    if (!canvas) {
-      return;
-    }
-
-    const width = canvas.clientWidth || 460;
-    const height = canvas.clientHeight || 230;
-
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    this.camera.position.z = 2.2;
-
-    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.renderer.setSize(width, height, false);
-
-    const geometry = new THREE.TorusKnotGeometry(0.56, 0.18, 120, 16);
-    const material = new THREE.MeshStandardMaterial({
-      color: '#00d4ff',
-      metalness: 0.7,
-      roughness: 0.25
-    });
-
-    this.torus = new THREE.Mesh(geometry, material);
-    this.scene.add(this.torus);
-
-    const light = new THREE.PointLight('#8be9ff', 6, 20);
-    light.position.set(2, 2, 3);
-    const ambientLight = new THREE.AmbientLight('#ffffff', 0.55);
-
-    this.scene.add(light, ambientLight);
-
-    const animate = () => {
-      if (!this.torus || !this.renderer || !this.scene || !this.camera) {
-        return;
-      }
-
-      this.torus.rotation.x += 0.005;
-      this.torus.rotation.y += 0.008;
-
-      this.renderer.render(this.scene, this.camera);
-      this.animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-  }
-
-  ngOnDestroy(): void {
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-    }
-
-    this.torus?.geometry.dispose();
-
-    if (this.torus?.material instanceof THREE.Material) {
-      this.torus.material.dispose();
-    }
-
-    this.renderer?.dispose();
   }
 }

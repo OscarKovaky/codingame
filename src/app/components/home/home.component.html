@@ -1,16 +1,77 @@
-<section class="panel home-hero">
-  <div>
+﻿<section class="panel home-hero">
+  <div class="home-hero__content">
     <p class="eyebrow">Sobre mí</p>
     <h2>{{ intro.name }}</h2>
     <p class="role">{{ intro.role }}</p>
-    <p>{{ intro.description }}</p>
+    <p class="home-hero__copy">{{ intro.description }}</p>
+
+    <div class="home-hero__highlights">
+      @for (highlight of heroHighlights; track highlight.label; let index = $index) {
+        <article class="hero-chip" [style.--chip-accent]="highlight.accent" [style.--chip-delay]="index">
+          <span>{{ highlight.label }}</span>
+        </article>
+      }
+    </div>
+
+    <div class="home-hero__tech-stack" aria-label="Tecnologías clave con las que trabajamos">
+      @for (technology of technologies; track technology.label; let index = $index) {
+        <article class="tech-card" [style.--tech-accent]="technology.accent" [style.--tech-delay]="index">
+          <span>{{ technology.label }}</span>
+        </article>
+      }
+    </div>
   </div>
 
-  <canvas #threeCanvas class="three-canvas" aria-label="Animación 3D decorativa"></canvas>
+  <div class="home-hero__visual">
+    <article class="code-stage" aria-label="Banner creativo con código y resultado visual">
+      <header class="code-stage__topbar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </header>
 
-  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
-    <p>Espacio publicitario</p>
-  </aside>
+      <div class="code-stage__screen">
+        <div class="code-stage__editor" aria-hidden="true">
+          <p class="code-stage__label">build.ts</p>
+
+          @for (line of codePreviewLines; track $index; let index = $index) {
+            <p class="code-stage__line" [style.--delay]="index">
+              <span class="code-stage__line-number">{{ index + 1 }}</span>
+              <span class="code-stage__line-text">
+                @for (token of line.tokens; track $index) {
+                  <span class="code-token" [class]="'code-token code-token--' + token.type">{{ token.text }}</span>
+                }
+              </span>
+            </p>
+          }
+        </div>
+
+        <div class="code-stage__result">
+          <div class="result-card">
+            <p class="result-card__eyebrow">Live preview</p>
+            <div class="result-card__window">
+              <div class="result-card__glow"></div>
+              <div class="result-card__panel">
+                <span class="result-card__badge">Deploy ready</span>
+                <h3>Interfaces que se ven bien y funcionan mejor.</h3>
+                <p>Diseño, rendimiento y una presentación cuidada para campañas, negocios y productos digitales.</p>
+                <div class="result-card__chips">
+                  <span>Angular</span>
+                  <span>UI Motion</span>
+                  <span>Responsive</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="hero-note">
+      <p class="hero-note__eyebrow">Enfoque</p>
+      <p>Sitios, campañas y productos digitales con presencia visual sólida y ejecución adaptable.</p>
+    </div>
+  </div>
 </section>
 
 <section class="panel metrics">
@@ -21,43 +82,30 @@
       <p class="metric-label">{{ metric.label }}</p>
     </article>
   }
-
-  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
-    <p>Espacio publicitario</p>
-  </aside>
 </section>
 
-<section class="panel">
-  <h3>Servicios</h3>
-  <div class="cards-grid">
-    @for (service of serviceCards; track service.title) {
-      <article class="card reveal-card">
-        <p class="card-icon" aria-hidden="true">{{ service.icon }}</p>
-        <h4>{{ service.title }}</h4>
-        <p>{{ service.description }}</p>
-      </article>
-    }
+<section id="services-section" class="panel section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Servicios</p>
+      <h3>Soluciones web con una presentación más editorial y estratégica</h3>
+    </div>
+    <p>
+      Mantengo el enfoque práctico del portafolio, pero con una sección más visual, aireada y preparada para
+      comunicar valor.
+    </p>
   </div>
 
-  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
-    <p>Espacio publicitario</p>
-  </aside>
+  <app-services-showcase [services]="serviceCards" />
 </section>
 
-<section class="panel">
-  <h3>Mis trabajos</h3>
-  <div class="cards-grid">
-    @for (work of workCards; track work.title) {
-      <article class="card reveal-card">
-        <p class="card-icon" aria-hidden="true">{{ work.icon }}</p>
-        <h4>{{ work.title }}</h4>
-        <p>{{ work.summary }}</p>
-        <p><strong>Stack:</strong> {{ work.stack }}</p>
-      </article>
-    }
+<section id="works-section" class="panel section-block">
+  <div class="section-heading section-heading--compact">
+    <div>
+      <p class="eyebrow">Mis trabajos</p>
+      <h3>Proyectos seleccionados</h3>
+    </div>
   </div>
 
-  <aside class="ad-slot" aria-label="Espacio para publicidad futura">
-    <p>Espacio publicitario</p>
-  </aside>
+  <app-works-carousel [works]="workCards" />
 </section>
