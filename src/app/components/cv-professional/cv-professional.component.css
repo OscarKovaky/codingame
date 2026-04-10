@@ -1,0 +1,315 @@
+.cv-shell {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.cv-shell__header {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.cv-shell__eyebrow {
+  margin: 0 0 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: color-mix(in oklab, var(--accent-color) 68%, white);
+}
+
+.cv-shell__intro h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+}
+
+.cv-shell__headline,
+.cv-shell__note,
+.cv-shell__hint {
+  margin: 0;
+  color: var(--muted-color);
+}
+
+.cv-shell__toolbar {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-color);
+  background: color-mix(in oklab, var(--surface-strong) 88%, transparent);
+}
+
+.language-switcher {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.3rem;
+  gap: 0.35rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.language-switcher__btn {
+  min-width: 52px;
+  min-height: 40px;
+  padding: 0.45rem 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--text-color);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.language-switcher__btn:hover,
+.language-switcher__btn:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.language-switcher__btn--active {
+  background: color-mix(in oklab, var(--accent-color) 26%, var(--surface-color));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent-color) 22%, transparent);
+}
+
+.cv-shell__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cv-shell__button {
+  border: 0;
+  cursor: pointer;
+}
+
+.cv-document {
+  display: grid;
+  gap: 1.6rem;
+  color: color-mix(in oklab, var(--text-color) 92%, white);
+}
+
+.cv-document__header {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cv-document__header h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+}
+
+.cv-document__role {
+  margin: 0.4rem 0 0;
+  font-size: 1.05rem;
+  color: color-mix(in oklab, var(--text-color) 82%, white);
+}
+
+.cv-document__location {
+  margin: 0.3rem 0 0;
+  color: var(--muted-color);
+}
+
+.cv-document__strengths {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.cv-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.cv-section h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--accent-color) 58%, white);
+}
+
+.cv-section p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.cv-contact-list {
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cv-contact-list__item {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.cv-contact-list dt {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-color);
+}
+
+.cv-contact-list dd {
+  margin: 0;
+}
+
+.cv-contact-list a,
+.cv-card a {
+  color: color-mix(in oklab, var(--accent-color) 50%, white);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.cv-skills-grid,
+.cv-grid-two,
+.cv-project-list,
+.cv-language-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cv-experience-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.cv-card {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--border-color);
+  background: color-mix(in oklab, var(--surface-strong) 78%, transparent);
+}
+
+.cv-card h3,
+.cv-card h4 {
+  margin: 0;
+}
+
+.cv-card h4 {
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-color);
+}
+
+.cv-card__meta,
+.cv-card__aside {
+  margin: 0;
+  color: var(--muted-color);
+}
+
+.cv-card__aside {
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.cv-card__aside p,
+.cv-card__meta {
+  margin: 0;
+}
+
+.cv-experience-card__header {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.cv-card__block {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cv-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.cv-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.cv-chip-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: color-mix(in oklab, var(--text-color) 88%, white);
+}
+
+.cv-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.cv-references {
+  border-radius: 1rem;
+  border: 1px dashed var(--border-color);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cv-references summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cv-references__content {
+  margin-top: 1rem;
+}
+
+@media (max-width: 960px) {
+  .cv-shell__header,
+  .cv-document__header,
+  .cv-experience-card__header,
+  .cv-contact-list,
+  .cv-skills-grid,
+  .cv-grid-two,
+  .cv-project-list,
+  .cv-language-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-card__aside {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .cv-shell {
+    padding: 1rem;
+  }
+
+  .cv-shell__actions {
+    flex-direction: column;
+  }
+
+  .button-link,
+  .cv-shell__button {
+    width: 100%;
+  }
+
+  .cv-chip-list span {
+    width: 100%;
+    justify-content: center;
+  }
+}

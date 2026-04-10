@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { BlogComponent } from './components/blog/blog.component';
 import { ChatbotWidgetComponent } from './components/chatbot-widget/chatbot-widget.component';
-import { CvComponent } from './components/cv/cv.component';
+import { CvProfessionalComponent } from './components/cv-professional/cv-professional.component';
 import { HomeComponent } from './components/home/home.component';
 import { VideosComponent } from './components/videos/videos.component';
 
@@ -12,7 +12,7 @@ type SectionTarget = 'services' | 'works';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, VideosComponent, BlogComponent, CvComponent, ChatbotWidgetComponent],
+  imports: [HomeComponent, VideosComponent, BlogComponent, CvProfessionalComponent, ChatbotWidgetComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

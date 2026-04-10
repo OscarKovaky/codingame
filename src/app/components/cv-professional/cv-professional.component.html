@@ -1,0 +1,224 @@
+<section class="panel cv-shell">
+  <header class="cv-shell__header">
+    <div class="cv-shell__toolbar">
+      <div class="language-switcher" role="group" [attr.aria-label]="cvDocument.ui.languageSwitcherLabel">
+        @for (language of availableLanguages; track language) {
+          <button
+            type="button"
+            class="language-switcher__btn"
+            [class.language-switcher__btn--active]="activeLanguage === language"
+            [attr.aria-pressed]="activeLanguage === language"
+            (click)="setLanguage(language)"
+          >
+            {{ cvDocument.ui.languageOptions[language] }}
+          </button>
+        }
+      </div>
+
+      <div class="cv-shell__actions">
+        @if (activeLanguage === 'es') {
+          <a
+            class="button-link button-link--ghost"
+            [href]="originalPdfHref"
+            download="Oscar_Ramirez_Aguilar_FullStack_DotNet_Angular_CV.pdf.pdf"
+          >
+            {{ cvDocument.ui.downloadOriginalPdf }}
+          </a>
+        }
+
+        <button type="button" class="button-link button-link--primary cv-shell__button" (click)="exportPdf()">
+          {{ activePdfLabel }}
+        </button>
+
+        <button type="button" class="button-link button-link--ghost cv-shell__button" (click)="downloadWord()">
+          {{ activeWordLabel }}
+        </button>
+      </div>
+
+      <p class="cv-shell__hint">{{ activeExportHint }}</p>
+    </div>
+  </header>
+
+  <article class="cv-document" aria-label="Curriculum vitae estructurado">
+    <header class="cv-document__header">
+      <div>
+        <h1>{{ cvDocument.name }}</h1>
+        <p class="cv-document__role">{{ cvDocument.headline }}</p>
+        <p class="cv-document__location">{{ cvDocument.location }}</p>
+      </div>
+
+      <ul class="cv-document__strengths" aria-label="Fortalezas principales">
+        @for (strength of cvDocument.strengths; track strength) {
+          <li>{{ strength }}</li>
+        }
+      </ul>
+    </header>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.contact }}</h2>
+      <dl class="cv-contact-list">
+        @for (contact of cvDocument.contactLinks; track contact.label) {
+          <div class="cv-contact-list__item">
+            <dt>{{ contact.label }}</dt>
+            <dd>
+              @if (contact.href) {
+                <a [href]="contact.href" [attr.target]="contact.href.startsWith('http') ? '_blank' : null" [attr.rel]="contact.href.startsWith('http') ? 'noreferrer' : null">{{ contact.value }}</a>
+              } @else {
+                {{ contact.value }}
+              }
+            </dd>
+          </div>
+        }
+      </dl>
+    </section>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.profile }}</h2>
+      @for (paragraph of cvDocument.profile; track paragraph) {
+        <p>{{ paragraph }}</p>
+      }
+    </section>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.technicalSkills }}</h2>
+      <div class="cv-skills-grid">
+        @for (category of cvDocument.skillCategories; track category.title) {
+          <article class="cv-card">
+            <h3>{{ category.title }}</h3>
+            <ul>
+              @for (item of category.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.experience }}</h2>
+      <div class="cv-experience-list">
+        @for (item of cvDocument.experience; track item.company + item.role) {
+          <article class="cv-card cv-experience-card">
+            <header class="cv-experience-card__header">
+              <div>
+                <h3>{{ item.role }}</h3>
+                <p class="cv-card__meta">{{ item.company }}</p>
+              </div>
+              <div class="cv-card__aside">
+                <p>{{ item.period }}</p>
+                <p>{{ item.location }}</p>
+              </div>
+            </header>
+
+            <p>{{ item.summary }}</p>
+
+            <div class="cv-card__block">
+              <h4>{{ cvDocument.labels.achievements }}</h4>
+              <ul>
+                @for (achievement of item.achievements; track achievement) {
+                  <li>{{ achievement }}</li>
+                }
+              </ul>
+            </div>
+
+            <div class="cv-card__block">
+              <h4>{{ cvDocument.labels.technologies }}</h4>
+              <p class="cv-chip-list">
+                @for (technology of item.technologies; track technology) {
+                  <span>{{ technology }}</span>
+                }
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <div class="cv-grid-two">
+      <section class="cv-section">
+        <h2>{{ cvDocument.labels.education }}</h2>
+        @for (item of cvDocument.education; track item.degree) {
+          <article class="cv-card">
+            <h3>{{ item.degree }}</h3>
+            <p class="cv-card__meta">{{ item.institution }}</p>
+            <p>{{ item.period }}</p>
+          </article>
+        }
+      </section>
+
+      <section class="cv-section">
+        <h2>{{ cvDocument.labels.languages }}</h2>
+        <div class="cv-language-list">
+        @for (item of cvDocument.languages; track item.name) {
+            <article class="cv-card">
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.level }}</p>
+            </article>
+          }
+        </div>
+      </section>
+    </div>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.certifications }}</h2>
+      <div class="cv-grid-two">
+        @for (item of cvDocument.certifications; track item.title) {
+          <article class="cv-card">
+            <h3>{{ item.title }}</h3>
+            <p class="cv-card__meta">{{ item.issuer }}</p>
+            @if (item.credentialUrl) {
+              <a [href]="item.credentialUrl" target="_blank" rel="noreferrer">{{ item.credentialUrl }}</a>
+            }
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>{{ cvDocument.labels.projects }}</h2>
+      <div class="cv-project-list">
+        @for (item of cvDocument.projects; track item.title) {
+          <article class="cv-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.summary }}</p>
+            <p class="cv-chip-list">
+              @for (technology of item.technologies; track technology) {
+                <span>{{ technology }}</span>
+              }
+            </p>
+            <div class="cv-project-links">
+              @if (item.repositoryUrl) {
+                <a [href]="item.repositoryUrl" target="_blank" rel="noreferrer">{{ projectRepositoryLabel }}</a>
+              }
+              @if (item.liveUrl) {
+                <a [href]="item.liveUrl" target="_blank" rel="noreferrer">{{ projectLiveLabel }}</a>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <details class="cv-references">
+        <summary>{{ cvDocument.ui.referencesSummary }}</summary>
+        <div class="cv-grid-two cv-references__content">
+          @for (item of cvDocument.references; track item.name) {
+            <article class="cv-card">
+              <h3>{{ item.name }}</h3>
+              <p class="cv-card__meta">{{ item.role }}</p>
+              <p>{{ item.company }}</p>
+              @if (item.focus) {
+                <p>{{ item.focus }}</p>
+              }
+              @if (item.contact) {
+                <a [href]="'mailto:' + item.contact">{{ item.contact }}</a>
+              }
+            </article>
+          }
+        </div>
+      </details>
+    </section>
+  </article>
+</section>
